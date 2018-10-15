@@ -16,6 +16,8 @@ from headers import EX, EY
 from headers.cells import \
     GCArrayTE, \
     DCPadArray
+from headers.experiments import \
+    MZI
 
 
 TECHNOLOGY = get_technology_by_name('EBeam')
@@ -46,5 +48,5 @@ if __name__ == '__main__':
 
     DCPadArray('test_dcpadarray', params={'angle_ex': 90}).place_cell(TOP, origin)
     GCArrayTE('test_gcarray', params={'angle_ex': 0}).place_cell(TOP, origin + 1000 * EX)
-
+    MZI('test_mzi').place_cell(TOP, origin + 500 * EX)
     layout.write('example_mask.gds')
