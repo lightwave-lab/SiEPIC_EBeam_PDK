@@ -13,11 +13,10 @@ sys.path.append(root())
 from SiEPIC.utils import get_technology_by_name
 
 from headers import EX, EY
-from headers.cells import \
-    GCArrayTE, \
-    DCPadArray
 from headers.experiments import \
-    MZI
+    MZI, \
+    MZI_FanRight, \
+    MZI_Experiment
 
 
 TECHNOLOGY = get_technology_by_name('EBeam')
@@ -37,7 +36,7 @@ if __name__ == '__main__':
     # lay_M1 = layout.layer(TECHNOLOGY['M1'])
     # lay_DevRec = layout.layer(TECHNOLOGY['DevRec'])
     # lay_Pin = layout.layer(TECHNOLOGY['PinRec'])
-    # lay_Text = layout.layer(TECHNOLOGY['Text'])
+    lay_Text = layout.layer(TECHNOLOGY['Text'])
     # lay_FloorPlan = layout.layer(TECHNOLOGY["FloorPlan"])
     # lay_SEM_ROI = layout.layer(TECHNOLOGY["26_SEM_ROI"])
     # lay_Si_p6nm = layout.layer(TECHNOLOGY["31_Si_p6nm"])
@@ -46,7 +45,17 @@ if __name__ == '__main__':
 
     origin = pya.DPoint(0, 0)
 
-    DCPadArray('test_dcpadarray', params={'angle_ex': 90}).place_cell(TOP, origin)
-    GCArrayTE('test_gcarray', params={'angle_ex': 0}).place_cell(TOP, origin + 1000 * EX)
-    MZI('test_mzi').place_cell(TOP, origin + 500 * EX)
+    def place_text(cell, text, position):
+        trans = pya.DTrans(pya.DTrans.R0, position)
+        text = pya.DText(text, trans)
+        text_shape = cell.shapes(lay_Text).insert(text)
+        text_shape.text_size = 12 / cell.layout().dbu
+
+    MZI('MZI').place_cell(TOP, origin + 53.84000 * EY)
+    place_text(TOP, 'Basic cell', origin + 123.5 * EY)
+    MZI_FanRight('MZI_FanRight').place_cell(TOP, origin - 132.12000 * EY)
+    place_text(TOP, 'Basic cell with optical routing', origin - 60 * EY)
+    MZI_Experiment('MZI_Experiment').place_cell(TOP, origin - 500 * EY)
+    place_text(TOP, 'Basic cell with optical/electrical routing', origin - 230 * EY)
+
     layout.write('example_mask.gds')

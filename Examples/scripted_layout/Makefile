@@ -18,4 +18,8 @@ from_python: main_python.py
 		python main_python.py; \
 	)
 
+clear:
+	rm cache/*
+
+
 .PHONY: default from_klayout from_klayout_batch_mode from_python
