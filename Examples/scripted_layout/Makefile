@@ -18,6 +18,12 @@ from_python: main_python.py
 		python main_python.py; \
 	)
 
+test:
+	( \
+		pytest test_klayout.py; \
+		klayout -e -z -r launch_python_test.py; \
+	)
+
 clear:
 	rm cache/*
 
