@@ -8,7 +8,7 @@ lygadgets.patch_environment()
 # point to the SiEPIC package because it is not deployed and installed in system python
 # This is a little sketchy because it looks through your filesystem instead of getting the up to date version
 if not lygadgets.isGSI():
-    siepic_package_path = os.path.join(lygadgets.klayout_home(), 'salt', 'siepic_tools', 'python')
+    siepic_package_path = os.path.join(lygadgets.environment.klayout_home(), 'salt', 'siepic_tools', 'python')
     sys.path.append(siepic_package_path)
 
 # specify directories for XOR test files

@@ -16,11 +16,7 @@ ex = pya.DVector(1, 0)
 root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 example_dir = os.path.join(root_dir, 'Examples')
 
-LOCAL_GDS_DIR = os.path.join(root_dir, example_gds)
-gds_name = 'GSiP_RingMod_Transceiver.gds'
-cell_name = 'GSiP_RingMod_Transceiver'
-
-#: these are formatted like (path, filename, cell_name)
+#: these are formatted like (relpath, filename, cell_name)
 cells_of_interest = [
                      ('.', 'RingResonator.gds', 'Ring'),
                      # ('.', 'UBC_Logo.gds', 'UBC_Logo'),
@@ -35,9 +31,10 @@ cells_of_interest = [
 def Fixed_Cells(TOP):
     ''' Using klayout's traditional read gds, insert cell method '''
     ly = TOP.layout()
-    for path, filename, cell_name in cells_of_interest:
-        cell = GDSCell(cell_name, filename=filename, gds_dir=path)
-        ly.read(os.path.join(path, filename))
+    for relpath, filename, cell_name in cells_of_interest:
+        gds_dir = os.path.join(example_dir, relpath)
+        # cell = GDSCell(cell_name, filename=filename, gds_dir=gds_dir)
+        ly.read(os.path.join(gds_dir, filename))
         gdscell2 = ly.cell(cell_name)
         rot_DTrans = pya.DTrans.R0
         TOP.insert(pya.DCellInstArray(gdscell2.cell_index(),
