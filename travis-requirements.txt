@@ -1,0 +1,4 @@
+scipy==1.1.0
+pytest==3.9.2
+lygadgets>=0.0.12
+lytest>=0.0.6
