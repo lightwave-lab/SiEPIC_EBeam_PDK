@@ -3,7 +3,7 @@ python:
 - '3.6'
 cache: pip
 install:
-  - pip install --upgrade -r travis-requirements.txt
+  - pip install --upgrade -r requirements-ci.txt
 # get a copy of SiEPIC-Tools from github. Pretend that klayout is installed.
 - mkdir SiEPIC-Tools
 - curl -L https://github.com/lightwave-lab/SiEPIC-Tools/tarball/v0.4-alpha.0-forCI | tar xz -C SiEPIC-Tools --strip-components 1
