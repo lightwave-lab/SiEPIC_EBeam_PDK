@@ -16,16 +16,6 @@ ex = pya.DVector(1, 0)
 root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 example_dir = os.path.join(root_dir, 'Examples')
 
-#: these are formatted like (relpath, filename, cell_name)
-cells_of_interest = [
-                     ('.', 'RingResonator.gds', 'Ring'),
-                     ('.', 'UBC_Logo.gds', 'UBC_Logo'),
-                     ('.', 'mzi_adjustable_splitter.gds', 'f'),
-                     ('.', 'Bragg.gds', 'f'),
-                     # ('.', 'Crossings.gds', 'a'),
-                     # ('GSiP/Transceiver', 'GSiP_RingMod_Transceiver.gds', 'GSiP_RingMod_Transceiver'),
-                     # ('CustomComponentTutorial', 'ebeam_taper_475_500_te1550_testcircuit.gds', 'taper_test_circuit'),
-                    ]
 
 def do_fixed_cell(topcell, relpath, filename, cell_name):
     ly = topcell.layout()
@@ -33,8 +23,7 @@ def do_fixed_cell(topcell, relpath, filename, cell_name):
     ly.read(os.path.join(gds_dir, filename))
     gdscell2 = ly.cell(cell_name)
     rot_DTrans = pya.DTrans.R0
-    topcell.insert(pya.DCellInstArray(gdscell2.cell_index(),
-                                  pya.DTrans(rot_DTrans, origin)))
+    topcell.insert(pya.DCellInstArray(gdscell2.cell_index(), pya.DTrans(rot_DTrans, origin)))
 
 @contained_pyaCell
 def Fixed_RingResonator(TOP):
@@ -62,3 +51,17 @@ def Fixed_Bragg(TOP):
     do_fixed_cell(TOP, '.', 'Bragg.gds', 'f')
 
 def test_Fixed_Bragg(): difftest_it(Fixed_Bragg, file_ext='.oas')()
+
+
+@contained_pyaCell
+def Fixed_Crossings(TOP):
+    do_fixed_cell(TOP, '.', 'Crossings.gds', 'a')
+
+def test_Fixed_Crossings(): difftest_it(Fixed_Crossings, file_ext='.oas')()
+
+
+@contained_pyaCell
+def Fixed_GSiP_RingMod_Transceiver(TOP):
+    do_fixed_cell(TOP, 'GSiP/Transceiver', 'GSiP_RingMod_Transceiver.gds', 'GSiP_RingMod_Transceiver')
+
+def test_Fixed_GSiP_RingMod_Transceiver(): difftest_it(Fixed_GSiP_RingMod_Transceiver, file_ext='.oas')()
