@@ -3,10 +3,15 @@ python:
 - '3.6'
 cache: pip
 install:
-  - pip install --upgrade -r travis-requirements.txt
+- pip install scipy
+- pip install pytest
+- pip install --upgrade lygadgets
+- pip install --upgrade lytest
+
 # get a copy of SiEPIC-Tools from github. Pretend that klayout is installed.
 - mkdir SiEPIC-Tools
-- curl -L https://github.com/lightwave-lab/SiEPIC-Tools/tarball/v0.4-alpha.0-forCI | tar xz -C SiEPIC-Tools --strip-components 1
+- TOOLS_VERSION=v0.3.48  # right not this version is hard coded, but could be changed to latest
+- curl -L https://github.com/lukasc-ubc/SiEPIC-Tools/tarball/$TOOLS_VERSION | tar xz -C SiEPIC-Tools --strip-components 1
 - lygadget_link SiEPIC-Tools/klayout_dot_config
 script:
 - DOCKER=1 pytest tests
