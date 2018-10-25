@@ -19,25 +19,25 @@ example_dir = os.path.join(root_dir, 'Examples')
 #: these are formatted like (relpath, filename, cell_name)
 cells_of_interest = [
                      ('.', 'RingResonator.gds', 'Ring'),
-                     # ('.', 'UBC_Logo.gds', 'UBC_Logo'),
-                     # ('.', 'mzi_adjustable_splitter.gds', 'f'),
-                     # ('.', 'Bragg.gds', 'f'),
+                     ('.', 'UBC_Logo.gds', 'UBC_Logo'),
+                     ('.', 'mzi_adjustable_splitter.gds', 'f'),
+                     ('.', 'Bragg.gds', 'f'),
                      # ('.', 'Crossings.gds', 'a'),
                      # ('GSiP/Transceiver', 'GSiP_RingMod_Transceiver.gds', 'GSiP_RingMod_Transceiver'),
                      # ('CustomComponentTutorial', 'ebeam_taper_475_500_te1550_testcircuit.gds', 'taper_test_circuit'),
                     ]
 
-@contained_pyaCell
-def Fixed_Cells(TOP):
-    ''' Using klayout's traditional read gds, insert cell method '''
-    ly = TOP.layout()
-    for relpath, filename, cell_name in cells_of_interest:
-        gds_dir = os.path.join(example_dir, relpath)
-        # cell = GDSCell(cell_name, filename=filename, gds_dir=gds_dir)
-        ly.read(os.path.join(gds_dir, filename))
-        gdscell2 = ly.cell(cell_name)
-        rot_DTrans = pya.DTrans.R0
-        TOP.insert(pya.DCellInstArray(gdscell2.cell_index(),
-                                      pya.DTrans(rot_DTrans, origin)))
+def do_fixed_cell(topcell, relpath, filename, cell_name):
+    ly = topcell.layout()
+    gds_dir = os.path.join(example_dir, relpath)
+    ly.read(os.path.join(gds_dir, filename))
+    gdscell2 = ly.cell(cell_name)
+    rot_DTrans = pya.DTrans.R0
+    topcell.insert(pya.DCellInstArray(gdscell2.cell_index(),
+                                  pya.DTrans(rot_DTrans, origin)))
 
-def test_Fixed_Cells(): difftest_it(Fixed_Cells, file_ext='.oas')()
+@contained_pyaCell
+def Fixed_RingResonator(TOP):
+    do_fixed_cell(TOP, '.', 'RingResonator.gds', 'Ring')
+
+def test_Fixed_RingResonator(): difftest_it(Fixed_RingResonator, file_ext='.oas')()
