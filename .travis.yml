@@ -4,8 +4,10 @@ python:
 cache: pip
 install:
 - pip install scipy
-- pip install --upgrade pytest
+- pip install pytest
 - pip install --upgrade lygadgets
 - pip install --upgrade lytest
+- git clone git@github.com:lukasc-ubc/SiEPIC-Tools.git
+- lygadget_link SiEPIC-Tools/klayout_dot_config
 script:
 - DOCKER=1 pytest tests
