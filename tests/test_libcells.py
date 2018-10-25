@@ -41,3 +41,24 @@ def Fixed_RingResonator(TOP):
     do_fixed_cell(TOP, '.', 'RingResonator.gds', 'Ring')
 
 def test_Fixed_RingResonator(): difftest_it(Fixed_RingResonator, file_ext='.oas')()
+
+
+@contained_pyaCell
+def Fixed_UBC_Logo(TOP):
+    do_fixed_cell(TOP, '.', 'UBC_Logo.gds', 'UBC_Logo')
+
+def test_Fixed_UBC_Logo(): difftest_it(Fixed_UBC_Logo, file_ext='.oas')()
+
+
+@contained_pyaCell
+def Fixed_mzi_adjustable_splitter(TOP):
+    do_fixed_cell(TOP, '.', 'mzi_adjustable_splitter.gds', 'f')
+
+def test_Fixed_mzi_adjustable_splitter(): difftest_it(Fixed_mzi_adjustable_splitter, file_ext='.oas')()
+
+
+@contained_pyaCell
+def Fixed_Bragg(TOP):
+    do_fixed_cell(TOP, '.', 'Bragg.gds', 'f')
+
+def test_Fixed_Bragg(): difftest_it(Fixed_Bragg, file_ext='.oas')()
