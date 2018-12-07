@@ -9,6 +9,9 @@ First, you need the `klayout` command line tool. I created a file called `klayou
 /Applications/klayout.app/Contents/MacOS/klayout "$@"
 ```
 
+# Install SiEPIC-Tools
+
+This assumes that you have a Developer's installation of SiEPIC-Tools in the v0.4.0 branch (this script was tested with commit 9ab51adb23cabf52429cbfa60f763e83cd4e09cc: https://github.com/lukasc-ubc/SiEPIC-Tools/tree/9ab51adb23cabf52429cbfa60f763e83cd4e09cc)
 
 # Building a mask
 
