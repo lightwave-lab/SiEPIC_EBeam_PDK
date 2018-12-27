@@ -1378,7 +1378,7 @@ class SiEPIC_EBeam(Library):
         # Import all the GDS files from the tech folder "gds"
         import os
         import fnmatch
-        dir_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../gds/mature")
+        dir_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../tech/EBeam/gds/mature")
         search_str = '*' + '.gds'
         for root, dirnames, filenames in os.walk(dir_path, followlinks=True):
             for filename in fnmatch.filter(filenames, search_str):
@@ -1411,5 +1411,5 @@ class SiEPIC_EBeam(Library):
         # Assuming klayout v0.25 or above
         self.technology = tech_name
 
-# Instantiate and register the library
-SiEPIC_EBeam()
+# # Instantiate and register the library
+# SiEPIC_EBeam()
