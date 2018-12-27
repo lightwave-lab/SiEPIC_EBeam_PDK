@@ -1102,7 +1102,7 @@ class ebeam_taper_te1550(PCellDeclarationHelper):
         return "ebeam_taper_te1550(" + ('%.3f-%.3f-%.3f' % (self.wg_width1, self.wg_width2, self.wg_length)) + ")"
 
 
-class Waveguide_Straight(pya.PCellDeclarationHelper):
+class Waveguide_Straight(PCellDeclarationHelper):
     """
     Input: length, width
     draws a straight waveguide with pins. centred at the instantiation point.
