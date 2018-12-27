@@ -89,7 +89,9 @@ from SiEPIC.utils import get_technology, get_technology_by_name
 
 # Import KLayout Python API methods:
 # Box, Point, Polygon, Text, Trans, LayerInfo, etc
-from pya import *
+from pya import Box, Point, Polygon, Text, Trans, LayerInfo, \
+    PCellDeclarationHelper, DPoint, DPath, Path, ShapeProcessor, \
+    Library, CellInstArray
 
 
 class Waveguide(PCellDeclarationHelper):
@@ -1168,7 +1170,7 @@ class Waveguide_Straight(PCellDeclarationHelper):
             pin_length = 2
 
         t = Trans(Trans.R0, -length / 2, 0)
-        pin = pya.Path([Point(pin_length / 2, 0), Point(-pin_length / 2, 0)], w)
+        pin = Path([Point(pin_length / 2, 0), Point(-pin_length / 2, 0)], w)
         pin_t = pin.transformed(t)
         shapes(LayerPinRecN).insert(pin_t)
         text = Text("pin1", t)
@@ -1176,7 +1178,7 @@ class Waveguide_Straight(PCellDeclarationHelper):
         shape.text_size = 0.4 / dbu
 
         t = Trans(Trans.R0, length / 2, 0)
-        pin = pya.Path([Point(-pin_length / 2, 0), Point(pin_length / 2, 0)], w)
+        pin = Path([Point(-pin_length / 2, 0), Point(pin_length / 2, 0)], w)
         pin_t = pin.transformed(t)
         shapes(LayerPinRecN).insert(pin_t)
         text = Text("pin2", t)
@@ -1400,11 +1402,14 @@ class SiEPIC_EBeam(Library):
         # If a library with that name already existed, it will be replaced then.
         self.register(library)
 
-#    self.register('SiEPIC-EBeam')
+        # self.register('SiEPIC-EBeam')
 
-        if int(Application.instance().version().split('.')[1]) > 24:
-            # KLayout v0.25 introduced technology variable:
-            self.technology = tech_name
+        # if int(Application.instance().version().split('.')[1]) > 24:
+        #     # KLayout v0.25 introduced technology variable:
+        #     self.technology = tech_name
+
+        # Assuming klayout v0.25 or above
+        self.technology = tech_name
 
 # Instantiate and register the library
 SiEPIC_EBeam()
