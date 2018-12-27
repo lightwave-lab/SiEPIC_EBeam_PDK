@@ -13,6 +13,12 @@ First, you need the `klayout` command line tool. I created a file called `klayou
 
 This assumes that you have a Developer's installation of SiEPIC-Tools in the v0.4.0 branch (this script was tested with commit 9ab51adb23cabf52429cbfa60f763e83cd4e09cc: https://github.com/lukasc-ubc/SiEPIC-Tools/tree/9ab51adb23cabf52429cbfa60f763e83cd4e09cc)
 
+In order for python to see the package "SiEPIC", you need to include its path into the PYTHONPATH variable. Type the following to do so:
+
+```bash
+export PYTHONPATH="/path/to/SiEPIC-Tools/klayout_dot_config/python:$PYTHONPATH"
+```
+
 # Building a mask
 
 Use formulas defines in the Makefile. Type `make` for the default build.
