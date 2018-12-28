@@ -21,8 +21,9 @@ export PYTHONPATH="/path/to/SiEPIC-Tools/klayout_dot_config/python:$PYTHONPATH"
 
 # Building a mask
 
-Use formulas defines in the Makefile. Type `make` for the default build.
+Use formulas defined in the Makefile. Type `make` for the default build.
 
+`make from_klayout`, `make from_klayout_batch_mode` and `make from_python` now all work, but they require a newer version of SiEPIC-Tools than listed above. This code was tested with commit hash 26c38fc63fc2221854fab56152277bb1bd410f2e https://github.com/lukasc-ubc/SiEPIC-Tools/tree/26c38fc63fc2221854fab56152277bb1bd410f2e (branch self-testing)
 
 # Testing
 
