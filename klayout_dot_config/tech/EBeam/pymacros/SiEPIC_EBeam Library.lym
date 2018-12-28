@@ -20,11 +20,25 @@
 This file is part of the SiEPIC_EBeam_PDK
 by Lukas Chrostowski (c) 2015-2017
 
+This Python file implements a library called "SiEPIC_EBeam", consisting of mature components that have Layouts and Compact Models for circuit simulations:
+ - Fixed GDS cell components: imported from SiEPIC-EBeam.gds
+ - PCells:
+    - ebeam_dc_halfring_straight
+    - ebeam_bragg_te1550: waveguide Bragg grating
+        - ebeam_taper_te1550: Waveguide Taper
+        - Waveguide_bump
+        - Waveguide_SBend
+        - Waveguide_Bend
+
+NOTE: after changing the code, the macro needs to be rerun to install the new
+implementation. The macro is also set to "auto run" to install the PCell
+when KLayout is run.
+
 """
 from siepic_ebeam_pdk_klayout import SiEPIC_EBeam
 
 # Instantiate and register the library
-SiEPIC_EBeam()
+SiEPIC_EBeam(verbose=True)
 
 
 

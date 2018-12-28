@@ -8,9 +8,10 @@ pwd = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(pwd)
 from siepic_tools.utils.gitpath import root
 sys.path.append(root())
+sys.path.append(os.path.join(root(), 'klayout_dot_config', 'python'))
 
 # siepic and global imports
-from siepic_tools.utils import get_technology_by_name
+from siepic_ebeam_pdk import EBEAM_TECH
 
 from headers import EX, EY
 from headers.experiments import \
@@ -19,7 +20,7 @@ from headers.experiments import \
     MZI_Experiment
 
 
-TECHNOLOGY = get_technology_by_name('EBeam')
+TECHNOLOGY = EBEAM_TECH
 # TECHNOLOGY
 # {'technology_name': 'EBeam',
 #  'dbu': 0.001,

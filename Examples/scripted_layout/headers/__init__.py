@@ -1,11 +1,10 @@
 import pya
 import os
 from functools import partial
-from SiEPIC.utils import get_technology_by_name
-from SiEPIC.utils.pcells import cache_cell as siepic_cache_cell
-from SiEPIC.utils.pcells import KLayoutPCell, objectview
+from siepic_ebeam_pdk import EBEAM_TECH
+from siepic_tools.utils.pcells import cache_cell as siepic_cache_cell
+from siepic_tools.utils.pcells import KLayoutPCell, objectview
 
-TECHNOLOGY = get_technology_by_name('EBeam')
 EX = pya.DVector(1, 0)
 EY = pya.DVector(0, 1)
 
@@ -16,7 +15,7 @@ cache_cell = partial(siepic_cache_cell, cache_dir=os.path.join(os.path.dirname(o
 class EBeamCell(KLayoutPCell):
     """ Main layout class for instantiating PDK-compatible cells """
 
-    TECHNOLOGY = TECHNOLOGY
+    TECHNOLOGY = EBEAM_TECH
 
 
 class EBeamCellWithLayers(EBeamCell):
@@ -49,34 +48,34 @@ class EBeamCellWithLayers(EBeamCell):
     def initialize_default_params(self):
         self.define_param("silayer", self.TypeLayer,
                           "Si Layer",
-                          default=TECHNOLOGY['Si'])
+                          default=EBEAM_TECH['Si'])
         self.define_param("MLOpen", self.TypeLayer,
                           "ML Open Layer",
-                          default=TECHNOLOGY['13_MLopen'])
+                          default=EBEAM_TECH['13_MLopen'])
         self.define_param("ML", self.TypeLayer,
                           "ML Layer",
-                          default=TECHNOLOGY['12_M2'])
+                          default=EBEAM_TECH['12_M2'])
         self.define_param("M_Heater", self.TypeLayer,
                           "M Heater Layer",
-                          default=TECHNOLOGY['M1'])
+                          default=EBEAM_TECH['M1'])
         self.define_param("devrec", self.TypeLayer,
                           "DevRec Layer",
-                          default=TECHNOLOGY['DevRec'])
+                          default=EBEAM_TECH['DevRec'])
         self.define_param("pinrec", self.TypeLayer,
                           "Pin Layer",
-                          default=TECHNOLOGY['PinRec'])
+                          default=EBEAM_TECH['PinRec'])
         self.define_param("textl", self.TypeLayer,
                           "Text Layer",
-                          default=TECHNOLOGY['Text'])
+                          default=EBEAM_TECH['Text'])
         self.define_param("SEM", self.TypeLayer,
                           "SEM Layer",
-                          default=TECHNOLOGY['SEM'])
+                          default=EBEAM_TECH['SEM'])
         self.define_param("Si_p6nm", self.TypeLayer,
                           "Si_p6nm Layer",
-                          default=TECHNOLOGY['31_Si_p6nm'])
+                          default=EBEAM_TECH['31_Si_p6nm'])
         self.define_param("FloorPlan", self.TypeLayer,
                           "FloorPlan Layer",
-                          default=TECHNOLOGY['FloorPlan'])
+                          default=EBEAM_TECH['FloorPlan'])
 
     def pre_pcell(self, layout, params=None):  # pylint: disable=unused-argument
         ''' Everything updates params and object views them

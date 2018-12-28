@@ -1,8 +1,8 @@
-from SiEPIC.utils.geometry import Port, \
+from siepic_tools.utils.geometry import Port, \
     manhattan_intersection
-from SiEPIC.utils.pcells import port_to_pin_helper, place_cell
-from SiEPIC.utils.pcells import CellWithPosition
-from SiEPIC.utils.layout import  \
+from siepic_tools.utils.pcells import port_to_pin_helper, place_cell
+from siepic_tools.utils.pcells import CellWithPosition
+from siepic_tools.utils.layout import  \
     layout_box, \
     layout_path
 

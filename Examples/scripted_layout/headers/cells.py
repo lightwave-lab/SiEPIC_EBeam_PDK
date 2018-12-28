@@ -3,12 +3,12 @@ import math
 from math import pi
 import pya
 
-from SiEPIC.utils.pcells import CellWithPosition
-from SiEPIC.utils.geometry import \
+from siepic_tools.utils.pcells import CellWithPosition
+from siepic_tools.utils.geometry import \
     Port,\
     bezier_optimal
-from SiEPIC.utils.pcells import port_to_pin_helper, place_cell
-from SiEPIC.utils.layout import \
+from siepic_tools.utils.pcells import port_to_pin_helper, place_cell
+from siepic_tools.utils.layout import \
     layout_rectangle, \
     append_relative,\
     layout_waveguide

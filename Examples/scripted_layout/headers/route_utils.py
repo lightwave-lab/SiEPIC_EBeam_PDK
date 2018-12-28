@@ -2,13 +2,11 @@ import pya
 import os
 import sys
 from contextlib import contextmanager
-from SiEPIC.utils import get_technology_by_name
-from SiEPIC.utils.geometry import rotate90, \
+from siepic_ebeam_pdk import EBEAM_TECH
+from siepic_tools.utils.geometry import rotate90, \
     manhattan_intersection, \
     cluster_ports
-from SiEPIC.utils.layout import layout_waveguide
-
-from functools import partial
+from siepic_tools.utils.layout import layout_waveguide
 
 
 @contextmanager
@@ -37,7 +35,7 @@ def layout_ebeam_waveguide_from_points(cell, points_list, radius=None, width=Non
         R, then the output will be a 90-degree arc of radius R.
     """
     from math import floor
-    TECHNOLOGY = get_technology_by_name('EBeam')
+    TECHNOLOGY = EBEAM_TECH
     if radius is None:
         radius = WAVEGUIDE_RADIUS
     if width is None:

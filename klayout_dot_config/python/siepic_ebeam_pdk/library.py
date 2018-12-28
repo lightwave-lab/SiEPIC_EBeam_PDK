@@ -85,7 +85,7 @@ with:
 
 """
 import math
-from SiEPIC.utils import get_technology, get_technology_by_name
+from siepic_tools.utils import get_technology_by_name
 
 # Import KLayout Python API methods:
 # Box, Point, Polygon, Text, Trans, LayerInfo, etc
@@ -448,7 +448,7 @@ class Waveguide_SBend(PCellDeclarationHelper):
         #LayerSiSPN = ly.layer(LayerSiSP)
         LayerPinRecN = ly.layer(self.pinrec)
         LayerDevRecN = ly.layer(self.devrec)
-        LayerTextN = ly.layer(get_technology()['Text'])
+        LayerTextN = ly.layer(TECHNOLOGY['Text'])
 
         from math import pi, cos, sin, log, sqrt, acos
 
@@ -1361,13 +1361,14 @@ class SiEPIC_EBeam(Library):
     The library where we will put the PCells and GDS into
     """
 
-    def __init__(self):
+    def __init__(self, verbose=True):
 
         tech_name = 'EBeam'
         library = tech_name
 #    library = 'SiEPIC-'+tech_name
 
-        print("Initializing '%s' Library." % library)
+        if verbose:
+            print("Initializing '%s' Library." % library)
 
         # Set the description
 # windows only allows for a fixed width, short description
@@ -1383,7 +1384,8 @@ class SiEPIC_EBeam(Library):
         for root, dirnames, filenames in os.walk(dir_path, followlinks=True):
             for filename in fnmatch.filter(filenames, search_str):
                 file1 = os.path.join(root, filename)
-                print(" - reading %s" % file1)
+                if verbose:
+                    print(" - reading %s" % file1)
                 self.layout().read(file1)
 
         # Create the PCell declarations

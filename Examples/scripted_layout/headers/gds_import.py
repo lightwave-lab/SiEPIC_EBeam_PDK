@@ -1,8 +1,8 @@
 import os
 
-from SiEPIC.utils.pcells import CellWithPosition
-from SiEPIC.utils.geometry import Port
-from SiEPIC.utils.gds_import import GDSCell as DefaultGDSCell
+from siepic_tools.utils.pcells import CellWithPosition
+from siepic_tools.utils.geometry import Port
+from siepic_tools.utils.gds_import import GDSCell as DefaultGDSCell
 
 LOCAL_GDS_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'gds_cells')
 
