@@ -13,7 +13,8 @@ from_klayout_batch_mode: main_klayout.py
 		klayout -e -zz -r main_klayout.py; \
 	)
 
-from_python: main_python.py
+from_python: main_python.py clear
+	@echo "Don't forget to export PYTHONPATH='/path/to/SiEPIC-Tools/klayout_dot_config/python'"
 	( \
 		python main_python.py; \
 	)
@@ -25,7 +26,7 @@ test:
 	)
 
 clear:
-	rm cache/*
+	rm cache/* || true
 
 
-.PHONY: default from_klayout from_klayout_batch_mode from_python
+.PHONY: default from_klayout from_klayout_batch_mode from_python clear
