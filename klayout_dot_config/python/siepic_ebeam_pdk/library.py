@@ -150,7 +150,12 @@ class Waveguide(PCellDeclarationHelper):
         from SiEPIC.utils import arc_xy, arc_bezier, angle_vector, angle_b_vectors, inner_angle_b_vectors, translate_from_normal
         from math import cos, sin, pi, sqrt
         import pya
-        from SiEPIC.extend import to_itype
+
+        # from SiEPIC.extend import to_itype
+        def to_itype(f, dbu):
+            if type(f) == str:
+                f = float(f)
+            return int(round(f / dbu))
 
         print("EBeam.Waveguide")
 
