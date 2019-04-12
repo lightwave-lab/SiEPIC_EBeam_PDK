@@ -1,8 +1,10 @@
-from os.path import join
+from os.path import join, realpath, dirname
+
 from siepic_tools.utils import register_siepic_technology as register
 
 # Load technologies included in the pdk
-tech_path = join('..', '..', 'klayout_dot_config', 'tech')
+current_path = dirname(realpath(__file__))
+tech_path = join(current_path, '..', '..', 'tech')
 EBEAM_TECH = register(join(tech_path, 'EBeam', 'EBeam.lyt'))
 
 
