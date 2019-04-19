@@ -7,7 +7,11 @@ import sys
 pwd = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(pwd)
 from siepic_tools.utils.gitpath import root
-sys.path.append(root())
+try:
+    sys.path.append(root())
+except IOError:
+    print("WARNING: this is not a git repository (not adding root to sys.path)")
+    print("         if you don't know what this is, please ignore.")
 sys.path.append(os.path.join(root(), 'klayout_dot_config', 'python'))
 
 # siepic and global imports

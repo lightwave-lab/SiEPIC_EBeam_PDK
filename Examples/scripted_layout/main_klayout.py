@@ -7,8 +7,11 @@ import sys
 pwd = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(pwd)
 from SiEPIC.utils.gitpath import root
-sys.path.append(root())
-
+try:
+    sys.path.append(root())
+except IOError:
+    print("WARNING: this is not a git repository (not adding root to sys.path)")
+    print("         if you don't know what this is, please ignore.")
 # siepic and global imports
 from SiEPIC.utils import get_technology_by_name
 
@@ -17,6 +20,13 @@ from headers.experiments import \
     MZI, \
     MZI_FanRight, \
     MZI_Experiment
+
+from siepic_tools.utils.layout import \
+    layout_rectangle, \
+    append_relative,\
+    layout_waveguide
+
+from headers.route_utils import layout_ebeam_waveguide_from_points
 
 
 TECHNOLOGY = get_technology_by_name('EBeam')
@@ -30,7 +40,7 @@ if __name__ == '__main__':
     dbu = layout.dbu = 0.001
     TOP = layout.create_cell("TOP")
 
-    # laySi = layout.layer(TECHNOLOGY['Si'])
+    laySi = layout.layer(TECHNOLOGY['Si'])
     # lay_ML = layout.layer(TECHNOLOGY['13_MLopen'])
     # lay_M2 = layout.layer(TECHNOLOGY['12_M2'])
     # lay_M1 = layout.layer(TECHNOLOGY['M1'])
@@ -50,6 +60,21 @@ if __name__ == '__main__':
         text = pya.DText(text, trans)
         text_shape = cell.shapes(lay_Text).insert(text)
         text_shape.text_size = 12 / cell.layout().dbu
+
+    # a = origin
+    # b = origin + 10 * EX + 15 * EY
+    # box = pya.DBox(a, b)
+    # TOP.shapes(laySi).insert(box)
+
+    # a = origin + 20 * EX
+    # b = a + 10 * EX
+    # c = b + 10 * EY
+    # layout_waveguide(TOP, laySi, [a, b, c], 1)
+
+    # a = origin + 40 * EX
+    # b = a + 10 * EX
+    # c = b + 10 * EY
+    # layout_ebeam_waveguide_from_points(TOP, [a, b, c], 5)
 
     MZI('MZI').place_cell(TOP, origin + 53.84000 * EY)
     place_text(TOP, 'Basic cell', origin + 123.5 * EY)
